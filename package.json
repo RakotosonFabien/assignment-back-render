@@ -1,0 +1,12 @@
+{
+  "name": "assignment-app",
+  "version": "1.0.0",
+  "engines": {
+	  "node": ">=18 <19"
+  },
+  "scripts": {
+    "start": "cd assignment-app-mbds-back-40-31 && node server.js",
+    "prebuild" : "cd assignment-app-mbds-back-40-31 && npm run build",
+    "build": "cd assignment-app-mbds-40-31 && npm run build"
+  }
+}
