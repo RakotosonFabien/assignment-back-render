@@ -1,0 +1,1 @@
+mongodb+srv://rakotosonfabien:motdepasse123456@ekalymaster.mxrkl.mongodb.net/assignments?retryWrites=true&w=majority
