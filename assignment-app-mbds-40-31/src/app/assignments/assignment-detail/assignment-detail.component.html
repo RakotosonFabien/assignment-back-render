@@ -1,0 +1,63 @@
+<!-- Indique que le composant affiché sera celui
+ correspondant à l'URL courant
+-->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+<header style="height:50px;">
+  <nav>
+    <ul>
+      <li><a routerLink="/home" routerLinkActive="active">Home</a></li>
+      <li><a routerLink="/assignments" routerLinkActive="active">LISTE DEVOIRS</a></li>
+      <li><a routerLink="/add" routerLinkActive="active">NOUVEAU DEVOIR</a></li>
+      <li style="float: right;"><a routerLink="/login" routerLinkActive="active" *ngIf="labelConnexion !== undefined" (click)="login()">{{labelConnexion}}</a></li>
+    </ul>
+  </nav>
+  </header>
+  <p *ngIf="isLogged()">Vous êtes connecté en tant que {{userConnecte?.nom_complet}}</p>
+
+<div class="card-container">
+  <div class="card"*ngIf="assignmentTransmis">
+    <div class="card-header" style="background-color: rgb(36, 20, 128); color: white;">
+      <h5 class="card-title" style="font-weight: bold;font-size: medium;">{{assignmentTransmis.nom}}</h5>
+    </div>
+    <div class="card-body">
+      <form>
+        <div class="form-group">
+          <label for="name1">Matiere et Professeur</label>
+          <div class="professor-info">
+            <input type="text" id="name1" class="form-control" placeholder="{{assignmentTransmis.matiere.nom}} - {{assignmentTransmis.professeur.nom_complet}}" readonly>
+            <img src="assets/images/{{assignmentTransmis.professeur.image}}" style="margin-left: 15px;" alt="Professeur" class="professor-image">
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="date">Etudiant</label>
+          <input type="text" id="date" class="form-control" placeholder="{{assignmentTransmis.etudiant.nom_complet}}" readonly>
+        </div>
+        <div class="form-group">
+          <label for="date">Date rendu</label>
+          <input type="text" id="date" class="form-control" placeholder="{{assignmentTransmis.dateDeRendu | date: 'dd/MM/yyyy'}}" readonly>
+        </div>
+        <div class="form-group">
+          <label for="note">Note</label>
+          <input type="text" id="note" class="form-control" placeholder="{{assignmentTransmis.note}} /20" readonly>
+        </div>
+        <div class="form-group">
+          <label for="remarque">Remarque</label>
+          <input type="text" id="remarque" class="form-control" placeholder="{{assignmentTransmis.remarque}}" readonly>
+        </div>
+        <mat-card-actions id="bottom">
+          <mat-checkbox class="rendu-checkbox" *ngIf="!assignmentTransmis.rendu" (click)="onAssignmentRendu()">
+            Rendu
+          </mat-checkbox>
+          <button mat-raised-button color="success" (click)="onEditAssignment()" [disabled]="!modifiable()">
+            EDIT
+          </button>
+          <button mat-raised-button color="accent" (click)="onDeleteAssignment()" [disabled]="!modifiable()">
+            DELETE
+          </button>
+        </mat-card-actions>
+      
+      </form>
+    </div>
+  </div>
+</div>

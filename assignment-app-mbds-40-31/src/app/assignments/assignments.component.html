@@ -1,0 +1,106 @@
+<!-- Indique que le composant affiché sera celui
+ correspondant à l'URL courant
+-->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+<header style="height:50px;">
+  <nav>
+    <ul>
+      <li><a routerLink="/home" routerLinkActive="active">Home</a></li>
+      <li><a routerLink="/assignments" routerLinkActive="active">LISTE DEVOIRS</a></li>
+      <li><a routerLink="/add" routerLinkActive="active">NOUVEAU DEVOIR</a></li>
+      <li style="float: right;"><a routerLink="/login" routerLinkActive="active" *ngIf="labelConnexion !== undefined" (click)="login()">{{labelConnexion}}</a></li>
+    </ul>
+  </nav>
+  </header>
+  <p *ngIf="isLogged()">Vous êtes connecté en tant que {{userConnecte?.nom_complet}}</p>
+
+<main class="container">
+    <mat-divider></mat-divider>
+   
+
+<h2>{{titre}}</h2>
+<hr>
+<p>
+  Nb assignments total {{totalDocs}}, par page {{limit}}, nbPages {{totalPages}}
+</p>
+<p>
+  Régler nb par page : 
+     <input type="range" 
+            min=1 max=100 value=10 
+            [(ngModel)]="limit"
+            (change)="getAssignments()"
+     /> {{limit}}
+</p>
+<p>
+<button (click)="premierePage()" [disabled]="!hasPrevPage">
+    Première page
+</button>
+<button (click)="pagePrecedente()" [disabled]="!hasPrevPage">
+    Page Précédente
+</button>
+<button (click)="pageSuivante()" [disabled]="!hasNextPage">Page Suivante</button>
+<button (click)="dernierePage()" [disabled]="!hasNextPage">
+    Derniere page
+</button>
+</p>
+
+
+    <hr>
+
+    <div class="card-container">
+        <div class="card" *ngFor="let assignment of assignments">
+          <div class="card-header" style="background-color: rgb(36, 20, 128); color: white;">
+            <h5 class="card-title" style="font-weight: bold;font-size: medium;">{{assignment.nom}}</h5>
+          </div>
+          <div class="card-body">
+            <form>
+              <div class="form-group">
+                <label for="name1">Etudiant</label>
+                <div class="professor-info">
+                  <input type="text" id="name1" class="form-control" placeholder="{{assignment.etudiant.nom_complet}}" readonly>
+                  <img src="assets/images/{{assignment.etudiant.image}}" style="margin-left: 15px;" alt="Etudiant" class="professor-image">
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="name1">Professeur</label>
+                <div class="professor-info">
+                  <input type="text" id="name1" class="form-control" placeholder="{{assignment.professeur.nom_complet}}" readonly>
+                  <img src="assets/images/{{assignment.professeur.image}}" style="margin-left: 15px;" alt="Professeur" class="professor-image">
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="date">Date limite</label>
+                <input type="text" id="date" class="form-control" placeholder="{{assignment.dateAttribution | date: 'dd/MM/yyyy'}}" readonly>
+              </div>
+              <div class="form-group">
+                <label for="remarque">Remarque</label>
+                <input type="text" id="remarque" class="form-control" placeholder="{{assignment.remarque}}" readonly>
+              </div>
+              <div *ngIf="assignment.rendu ; else nonOk">
+                <h5 [style.color]="couleurNote(assignment.note)">Note = {{assignment.note}}</h5>
+                <p>Date de rendu : {{ assignment.dateDeRendu | date:'dd/MM/yyyy' }}</p>
+              </div>
+              <ng-template #nonOk>
+                <h5 style="color: red;">
+                  Non rendu !
+                  <button (click)="rendre(assignment)" type="submit" style="background-color:rgba(70, 228, 240, 0.842);" class="btn btn-primary">Rendre</button>
+                </h5>
+                <br>
+              </ng-template>              
+              <a routerLink="/assignments/{{assignment.id}}">
+              <button type="submit" style="background-color: rgba(44, 207, 126, 0.842);" class="btn btn-primary">Voir</button>
+              </a>
+              <a routerLink="/assignments/{{assignment.id}}/edit">
+                <button type="submit" style="background-color: orange;" class="btn btn-primary">Modifier</button>
+                </a>
+            </form>
+          </div>
+        </div>
+      </div>
+     
+    
+</main>
+
+
+  

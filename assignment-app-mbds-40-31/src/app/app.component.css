@@ -1,0 +1,168 @@
+header {
+    background-color: rgb(187, 162, 109);
+    padding: 10px;
+  }
+  
+  nav ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+  }
+  
+  nav ul li {
+    display: inline-block;
+    margin-right: 10px;
+  }
+  
+  nav ul li a {
+    color: #fff;
+    text-decoration: none;
+    padding: 5px;
+  }
+  
+  nav ul li a:hover {
+    background-color: #555;
+  }
+  
+  .active {
+    background-color: #777;
+  }
+  
+  
+  
+  .container {
+      display:flex;
+      flex-direction:column;
+  }
+  
+  .ajouterBtn {
+      align-self: flex-end;
+  }
+  
+  .example-viewport {
+      height: 600px;
+      width: 1600px;
+      border: 1px solid black;
+    }
+    
+    .example-item {
+      height: 150px;
+    }
+  
+    .demo-table {
+      width: 100%;
+    }
+    
+    .mat-column-id {
+      width: 32px;
+      border-right: 1px solid currentColor;
+      padding-right: 24px;
+      text-align: center;
+    }
+    
+    .mat-column-nom {
+      padding-left: 16px;
+      font-size: 20px;
+    }
+    
+    .mat-column-dateDeRendu {
+      font-style: italic;
+    }
+    
+    .mat-column-rendu {
+      width: 32px;
+      text-align: center;
+      font-weight: bold;
+    }
+    
+    .card {
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      padding: 20px;
+      margin-bottom: 20px;
+    }
+    
+    .card-header {
+      background-color: #152b3f;
+      padding: 10px;
+      border-bottom: 1px solid #ccc;
+    }
+    
+    .card-title {
+      margin: 0;
+      font-size: 5px;
+    }
+    
+    .card-body {
+      padding: 10px;
+    }
+  
+    .card-container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+    }
+    
+    .card {
+      width: calc(33.33% - 10px); /* Adjust the width as per your requirements */
+      /* Rest of the styles remain the same */
+    }
+    .professor-info {
+      display: flex;
+      align-items: center;
+    }
+    
+    .professor-image {
+      width: 80px;
+      height: 60px;
+      margin-right: 10px;
+      border-radius: 20%;
+    }
+  
+    
+    
+    
+    .card {
+      border: none;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+    
+    .card-header {
+      background-color: #f5f5f5;
+      padding: 10px 20px;
+      border-bottom: none;
+    }
+    
+    .card-title {
+      margin: 0;
+      font-size: 24px;
+      font-weight: bold;
+    }
+    
+  
+    button {
+      padding: 10px 20px;
+      background-color: #9fc546;
+      color: white;
+      border: none;
+      cursor: pointer;
+      margin-right: 10px;
+      border-radius: 10px;
+      height: auto;
+  }
+  
+  button:disabled {
+      background-color: #ccc;
+      cursor: not-allowed;
+  }
+  
+  /* CSS styles for the input range */
+  input[type="range"] {
+      width: 200px;
+  }
+  
+  /* CSS styles for the paragraphs */
+  p {
+      margin-bottom: 10px;
+  }

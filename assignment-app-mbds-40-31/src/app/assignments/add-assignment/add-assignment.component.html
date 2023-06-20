@@ -1,0 +1,54 @@
+<!-- Indique que le composant affiché sera celui
+ correspondant à l'URL courant
+-->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+<header style="height:50px;">
+  <nav>
+    <ul>
+      <li><a routerLink="/home" routerLinkActive="active">Home</a></li>
+      <li><a routerLink="/assignments" routerLinkActive="active">LISTE DEVOIRS</a></li>
+      <li><a routerLink="/add" routerLinkActive="active">NOUVEAU DEVOIR</a></li>
+      <li style="float: right;"><a routerLink="/login" routerLinkActive="active" *ngIf="labelConnexion !== undefined"
+          (click)="login()">{{labelConnexion}}</a></li>
+    </ul>
+  </nav>
+</header>
+<p *ngIf="isLogged()">Vous êtes connecté en tant que {{userConnecte?.nom_complet}}</p>
+
+<div class="container">
+  <form ngForm #assignmentForm="ngForm" (submit)="onSubmit(assignmentForm); assignmentForm.reset()" class="form">
+    <mat-form-field class="form-field">
+      <input matInput [(ngModel)]="nomDevoir" name="nom" placeholder="Nom du devoir" required>
+    </mat-form-field>
+
+    <mat-form-field class="form-field">
+      <mat-label>Étudiant</mat-label>
+      <select matNativeControl required [(ngModel)]="idEtudiant" name="idEtudiant">
+        <option *ngFor="let etudiant of etudiants" [value]="etudiant.id">{{ etudiant.nom_complet }}</option>
+      </select>
+    </mat-form-field>
+
+    <mat-form-field class="form-field">
+      <mat-label>Matière</mat-label>
+      <select matNativeControl required [(ngModel)]="idMatiere" name="idMatiere">
+        <option *ngFor="let matiere of matieres" [value]="matiere.id">{{ matiere.nom }}</option>
+      </select>
+    </mat-form-field>
+
+    <mat-form-field class="form-field">
+      <mat-label>Date limite</mat-label>
+      <input matInput [matDatepicker]="attributionPicker" [(ngModel)]="dateAttribution" name="dateAttribution" required>
+      <mat-datepicker-toggle matSuffix [for]="attributionPicker"></mat-datepicker-toggle>
+      <mat-datepicker #attributionPicker></mat-datepicker>
+    </mat-form-field>
+
+    <mat-form-field class="form-field">
+      <textarea matInput [(ngModel)]="remarque" name="remarque" placeholder="Remarque"></textarea>
+    </mat-form-field>
+
+    <button mat-flat-button color="primary" type="submit">
+      Ajouter un devoir
+    </button>
+  </form>
+</div>
